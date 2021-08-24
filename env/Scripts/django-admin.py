@@ -1,4 +1,4 @@
-#!c:\users\marco\desktop\django-react-proy\env\scripts\python.exe
+#!c:\users\marco\desktop\django-react-testbarrickgold\env\scripts\python.exe
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 
