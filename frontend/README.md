@@ -1,8 +1,4 @@
-## Available Scripts
-
-In the project directory, you can run:
-
-```shell
+```
 yarn install
 yarn start
 ```
