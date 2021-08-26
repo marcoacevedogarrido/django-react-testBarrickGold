@@ -19,11 +19,10 @@ from rest_framework.decorators import api_view, permission_classes
 class UserModelSerializer(serializers.ModelSerializer):
     username = serializers.CharField()
     password = serializers.CharField(min_length=3)
-    clientes = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = User
-        fields = ('username', 'password', 'clientes')
+        fields = ('username', 'password')
         extra_kwargs = {'password': {'write_only': True}}
 
 
@@ -56,6 +55,11 @@ class UserSignUpSerializer(serializers.Serializer):
     username = serializers.CharField(min_length=4,max_length=20,validators=[UniqueValidator(queryset=User.objects.all())])
     password = serializers.CharField(min_length=8, max_length=64)
     password_confirmation = serializers.CharField(min_length=8, max_length=64)
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password', 'password_confirmation')
+        extra_kwargs = {'password': {'write_only': True}}
 
 
     def validate(self, data):

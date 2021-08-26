@@ -1,7 +1,6 @@
 from rest_framework import serializers, viewsets
 from server.models import Proceso
 from server.api.documentos import DocumentoSerializer
-from server.api.clientes import ClienteSerializer
 from server.api.productos import ProductoSerializer
 from rest_framework import views
 
@@ -15,9 +14,10 @@ class ProcesoSerializer(serializers.ModelSerializer):
         model = Proceso
         fields = ['id', 'cantidad', 'documento_obj', 'producto_obj', 'owner']
 
-    def create(self, validated_data):
-        return Proceso.objects.create(**validated_data)
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
+        
 class ProcesoView(viewsets.ModelViewSet):
     queryset = Proceso.objects.all()
     serializer_class = ProcesoSerializer
