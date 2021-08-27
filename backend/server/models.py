@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 
 class Proceso(models.Model):
     user = models.ForeignKey(User, related_name='procesos', on_delete=models.CASCADE, null=True)
-    documento = models.ForeignKey('server.Documento', on_delete=models.CASCADE, null=False, blank=True)
-    producto = models.ForeignKey('server.Producto', on_delete=models.CASCADE, default=True)
+    documento = models.ForeignKey('server.Documento', related_name='documentos', on_delete=models.CASCADE, null=False, blank=True)
+    producto = models.ForeignKey('server.Producto', related_name='productos', on_delete=models.CASCADE, null=False, blank=True)
     cantidad = models.FloatField(null=False, blank=True)
 
     class Meta:
@@ -18,7 +18,7 @@ class Proceso(models.Model):
 class Producto(models.Model):
     nombre = models.CharField(max_length=50,null=True, blank=True)
     codigo = models.CharField(max_length=50,null=True, blank=True)
-    precio = models.FloatField(default=True)
+    precio = models.FloatField()
 
     class Meta:
         ordering = ['id']
